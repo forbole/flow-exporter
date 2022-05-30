@@ -1,0 +1,4 @@
+delegator_address: "0xfb397444147918de"
+validator_address: "237a7a04ecf88b7c21001589ecc277190a6f7cd6e56a296a203552ade6db0927"
+exporter_port: ":8899"
+grpc_address: "access.mainnet.nodes.onflow.org:9000"
