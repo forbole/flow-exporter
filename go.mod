@@ -1,36 +1,33 @@
-module forbole/flow-exporter
+module github.com/forbole/flow-exporter
 
 go 1.18
 
 require (
+	github.com/mitchellh/go-homedir v1.1.0
 	github.com/onflow/cadence v0.23.4
 	github.com/onflow/flow-go-sdk v0.25.0
+	github.com/prometheus/client_golang v0.9.1
+	github.com/spf13/cobra v1.4.0
+	github.com/spf13/viper v1.12.0
 )
 
 require (
 	github.com/beorn7/perks v0.0.0-20180321164747-3a771d992973 // indirect
 	github.com/fsnotify/fsnotify v1.5.4 // indirect
-	github.com/go-kit/kit v0.8.0 // indirect
-	github.com/go-logfmt/logfmt v0.3.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
-	github.com/kr/logfmt v0.0.0-20140226030751-b84e30acd515 // indirect
 	github.com/magiconair/properties v1.8.6 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.1 // indirect
-	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.1 // indirect
-	github.com/prometheus/client_golang v0.9.1 // indirect
 	github.com/prometheus/client_model v0.0.0-20190812154241-14fe0d1b01d4 // indirect
 	github.com/prometheus/common v0.0.0-20181113130724-41aa239b4cce // indirect
 	github.com/prometheus/procfs v0.0.0-20181005140218-185b4288413d // indirect
 	github.com/spf13/afero v1.8.2 // indirect
 	github.com/spf13/cast v1.5.0 // indirect
-	github.com/spf13/cobra v1.4.0 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/spf13/viper v1.12.0 // indirect
 	github.com/subosito/gotenv v1.3.0 // indirect
 	gopkg.in/ini.v1 v1.66.4 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
@@ -40,7 +37,6 @@ require (
 	github.com/btcsuite/btcd v0.20.1-beta // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/ethereum/go-ethereum v1.9.13 // indirect
-	github.com/forbole/flow-exporter v0.0.0-20220526011110-9973edfac8c4
 	github.com/fxamacker/cbor/v2 v2.3.1-0.20211029162100-5d5d7c3edd41 // indirect
 	github.com/fxamacker/circlehash v0.2.0 // indirect
 	github.com/go-test/deep v1.0.5 // indirect
@@ -64,9 +60,4 @@ require (
 	google.golang.org/grpc v1.46.2 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0 // indirect
-)
-
-replace (
-	github.com/forbole/flow-exporter => /home/forbole/flow-exporter
-	github.com/forbole/flow-exporter/types => /home/forbole/flow-exporter/types
 )

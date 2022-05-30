@@ -2,7 +2,8 @@ package collector
 
 import (
 	"context"
-	"forbole/flow-exporter/types"
+
+	"github.com/forbole/flow-exporter/types"
 
 	"github.com/onflow/flow-go-sdk/access/grpc"
 	"github.com/prometheus/client_golang/prometheus"
