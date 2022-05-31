@@ -62,7 +62,7 @@ func NewFlowValidatorCollector(ctx context.Context, flowClient *grpc.Client, val
 		ValidatorCommittedTotal: prometheus.NewDesc(
 			"flow_validator_token_committed",
 			"Token committed per validator",
-			[]string{"validator_address"},
+			[]string{"validator_address", "role"},
 			types.FLOW_DENOM_LABEL,
 		),
 		ValidatorRewardedTotal: prometheus.NewDesc(
@@ -102,6 +102,12 @@ func (collector *FlowValidatorCollector) Collect(ch chan<- prometheus.Metric) {
 		ch <- prometheus.MustNewConstMetric(collector.ValidatorDelegatorCount, prometheus.GaugeValue, float64(nodeInfo.DelegatorIDCounter), collector.ValidatorAddress)
 		ch <- prometheus.MustNewConstMetric(collector.ValidatorStakedTotal, prometheus.GaugeValue, types.ConvertToDisplayDenom(nodeInfo.TokensStaked), collector.ValidatorAddress, types.ParseRoleByID(nodeInfo.Role))
 		ch <- prometheus.MustNewConstMetric(collector.ValidatorRewardedTotal, prometheus.GaugeValue, types.ConvertToDisplayDenom(nodeInfo.TokensRewarded), collector.ValidatorAddress)
+
+		if totalTokenCommitted, err := types.GetTotalCommittedWithDelegators(collector.Ctx, collector.FlowClient, collector.ValidatorAddress); err != nil {
+			ch <- prometheus.NewInvalidMetric(collector.ValidatorCommittedTotal, err)
+		} else {
+			ch <- prometheus.MustNewConstMetric(collector.ValidatorCommittedTotal, prometheus.GaugeValue, types.ConvertToDisplayDenom(totalTokenCommitted), collector.ValidatorAddress, types.ParseRoleByID(nodeInfo.Role))
+		}
 	}
 
 	if commission, err := types.GetRewardCutPercentage(collector.Ctx, collector.FlowClient); err != nil {
@@ -114,11 +120,5 @@ func (collector *FlowValidatorCollector) Collect(ch chan<- prometheus.Metric) {
 		ch <- prometheus.NewInvalidMetric(collector.NetworkEpochTokenPayout, err)
 	} else {
 		ch <- prometheus.MustNewConstMetric(collector.NetworkEpochTokenPayout, prometheus.GaugeValue, types.ConvertToDisplayDenom(epochPayout))
-	}
-
-	if totalTokenCommitted, err := types.GetTotalCommittedWithDelegators(collector.Ctx, collector.FlowClient, collector.ValidatorAddress); err != nil {
-		ch <- prometheus.NewInvalidMetric(collector.ValidatorCommittedTotal, err)
-	} else {
-		ch <- prometheus.MustNewConstMetric(collector.ValidatorCommittedTotal, prometheus.GaugeValue, types.ConvertToDisplayDenom(totalTokenCommitted), collector.ValidatorAddress)
 	}
 }
